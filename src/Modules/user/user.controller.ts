@@ -10,19 +10,26 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
-import { UserEntity } from 'src/entities/user.entity';
+import { UserEntity } from 'src/Modules/entities/user.entity';
 import { DeleteResult, InsertResult, UpdateResult } from 'typeorm';
-import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UserService) {}
 
-  @Public()
   @Post()
   // localhost:3000/user
   async create(@Body() createUserDto: CreateUserDto): Promise<InsertResult> {
-    return await this.usersService.createUser(createUserDto);
+    try {
+      console.log('Received signup request:', createUserDto);
+      const result = await this.usersService.createUser(createUserDto);
+      console.log('User created successfully:', result);
+
+      return result;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw error;
+    }
   }
 
   @Get()

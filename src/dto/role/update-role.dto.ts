@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { IsEnum, IsNotEmpty, IsString, MaxLength } from 'class-validator';
-import { UserRole } from 'src/entities/role.entity';
+import { IsEnum, IsOptional, IsString, Length } from 'class-validator';
+import { UserRole } from 'src/Modules/entities/role.entity';
 
 export class UpdateRoleDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(UserRole)
   name?: UserRole;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MaxLength(255)
+  @Length(10, 255)
   description?: string;
 }

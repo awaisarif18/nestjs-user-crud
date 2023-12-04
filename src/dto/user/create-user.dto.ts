@@ -1,54 +1,40 @@
 /* eslint-disable prettier/prettier */
 import {
-  IsDate,
   IsEmail,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
+  // IsNotEmpty,
+  // IsNumber,
+  // IsOptional,
+
+  // IsNumber,
   IsString,
-  IsStrongPassword,
-  MaxDate,
-  MaxLength,
-  MinLength,
+  Length,
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsNotEmpty()
-  @MaxLength(30)
+  @Length(3, 30)
   @IsString()
-  name!: string;
-
   @IsNotEmpty()
-  @MaxLength(60)
-  @MinLength(7)
+  username!: string;
+
+  @Length(7, 30)
   @IsEmail()
+  @IsNotEmpty()
   email!: string;
 
+  @Length(7, 30)
   @IsNotEmpty()
-  @IsStrongPassword()
-  @MinLength(7)
-  @MaxLength(30)
+  @IsString()
   password!: string;
 
+  @Length(4, 30)
+  @IsNotEmpty()
+  nickname!: string;
+
   @IsOptional()
-  @MinLength(4)
-  @MaxLength(30)
-  nickname?: string;
+  Department?: number;
 
   @IsNotEmpty()
-  @IsDate()
-  @MaxDate(new Date())
-  createdOn!: Date;
-
-  @IsNotEmpty()
-  @IsDate()
-  @MaxDate(new Date())
-  modifiedOn!: Date;
-
-  @IsNumber()
-  department?: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  role!: number;
+  Role!: number;
 }

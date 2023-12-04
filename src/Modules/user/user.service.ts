@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../../entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
 import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
 import { UpdateUserDto } from '../../dto/user/update-user.dto';
@@ -14,6 +14,7 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
     // insert method return <InsertResult> data type and we would have to use save when immediate data is required in the frontend
+
     return await this.userRepo.insert(createUserDto);
   }
 
@@ -40,9 +41,9 @@ export class UserService {
     return await this.userRepo.delete(id);
   }
 
-  async findByName(name: string): Promise<UserEntity> {
+  async findByName(username: string): Promise<UserEntity> {
     // console.log(name);
-    return await this.userRepo.findOne({ where: { name } });
+    return await this.userRepo.findOne({ where: { username } });
   }
 }
 

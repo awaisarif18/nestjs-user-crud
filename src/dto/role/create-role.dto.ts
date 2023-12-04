@@ -1,13 +1,12 @@
 /* eslint-disable prettier/prettier */
 import {
   IsNotEmpty,
-  IsDate,
-  MaxDate,
   IsEnum,
   IsString,
-  MaxLength,
+  IsOptional,
+  Length,
 } from 'class-validator';
-import { UserRole } from 'src/entities/role.entity';
+import { UserRole } from 'src/Modules/entities/role.entity';
 
 export class CreateRoleDto {
   @IsNotEmpty()
@@ -15,16 +14,7 @@ export class CreateRoleDto {
   name!: UserRole;
 
   @IsString()
-  @MaxLength(255)
+  @Length(10, 255)
+  @IsOptional()
   description?: string;
-
-  @IsNotEmpty()
-  @IsDate()
-  @MaxDate(new Date())
-  createdOn!: Date;
-
-  @IsNotEmpty()
-  @IsDate()
-  @MaxDate(new Date())
-  modifiedOn!: Date;
 }

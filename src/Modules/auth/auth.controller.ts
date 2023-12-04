@@ -18,8 +18,18 @@ export class AuthController {
   @Post('login')
   // localhost:300/auth/login
   login(@Body() loginDto: LoginDto) {
-    console.log(loginDto);
-    return this.authService.login(loginDto);
+    try {
+      console.log('Recieved login request', loginDto);
+      const result = this.authService.login(loginDto);
+      console.log('Login Successful', result);
+      return result;
+    } catch (error) {
+      // console.log(loginDto);
+      // return this.authService.login(loginDto);
+
+      console.error('Error creating user:', error);
+      throw error;
+    }
   }
 
   @UseGuards(AuthGuard)

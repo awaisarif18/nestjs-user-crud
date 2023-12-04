@@ -6,30 +6,26 @@ import {
   Param,
   Patch,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from 'src/dto/role/create-role.dto';
 import { UpdateRoleDto } from 'src/dto/role/update-role.dto';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
-import { RoleEntity } from 'src/entities/role.entity';
-import { Public } from '../auth/decorators/public.decorator';
-import { AuthGuard } from '../auth/auth.guard';
+import { RoleEntity } from 'src/Modules/entities/role.entity';
 
-@UseGuards(AuthGuard)
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
-  @Public()
+
   @Post()
   // localhost:3000/role
   async create(@Body() createRoleDto: CreateRoleDto): Promise<InsertResult> {
     return await this.roleService.createRole(createRoleDto);
   }
 
-  @Public()
   @Get()
   // localhost:3000/role
+  //enkwwknd
   async findAll(): Promise<RoleEntity[]> {
     return await this.roleService.findAll();
   }

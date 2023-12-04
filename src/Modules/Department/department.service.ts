@@ -2,7 +2,7 @@ import { UpdateDepartmentDto } from '../../dto/department/update-department.dto'
 import { CreateDepartmentDto } from '../../dto/department/create-department.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DepartmentEntity } from '../../entities/department.entity';
+import { DepartmentEntity } from '../entities/department.entity';
 import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()

@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { DepartmentEntity } from 'src/entities/department.entity';
-import { RoleEntity } from 'src/entities/role.entity';
+import { DepartmentEntity } from 'src/Modules/entities/department.entity';
+import { RoleEntity } from 'src/Modules/entities/role.entity';
 import * as dotenv from 'dotenv';
-import { UserEntity } from 'src/entities/user.entity';
+import { UserEntity } from 'src/Modules/entities/user.entity';
 
 dotenv.config();
 

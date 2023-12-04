@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, MaxLength, MinLength, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class LoginDto {
-  @IsNotEmpty()
-  @MaxLength(30)
+  @Length(3, 30)
   @IsString()
-  name: string;
-
   @IsNotEmpty()
-  @MinLength(7)
-  @MaxLength(30)
+  username!: string;
+
+  @Length(7, 30)
+  @IsString()
+  @IsNotEmpty()
   password!: string;
 }
