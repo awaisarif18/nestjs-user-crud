@@ -24,9 +24,6 @@ export class AuthController {
       console.log('Login Successful', result);
       return result;
     } catch (error) {
-      // console.log(loginDto);
-      // return this.authService.login(loginDto);
-
       console.error('Error creating user:', error);
       throw error;
     }
