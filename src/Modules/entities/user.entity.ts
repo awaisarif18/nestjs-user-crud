@@ -25,11 +25,15 @@ export class UserEntity extends BaseEntity {
 
   @ManyToOne(() => DepartmentEntity, (department) => department.User, {
     nullable: true,
+    eager: true,
   })
   @JoinColumn({ name: 'department_id', referencedColumnName: 'id' })
   Department: number;
 
-  @ManyToOne(() => RoleEntity, (role) => role.User, { nullable: false })
+  @ManyToOne(() => RoleEntity, (role) => role.User, {
+    nullable: false,
+    eager: true,
+  })
   @JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
   Role: number;
 }
