@@ -50,7 +50,15 @@ export class UsersController {
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UpdateResult> {
-    return await this.usersService.update(id, updateUserDto);
+    try {
+      console.log('Received update request:', updateUserDto);
+      const result = await this.usersService.update(id, updateUserDto);
+      console.log('User updated successfully:', result);
+      return result;
+    } catch (error) {
+      console.error('Error updating user:', error);
+      throw error;
+    }
   }
 
   @Delete(':id')
