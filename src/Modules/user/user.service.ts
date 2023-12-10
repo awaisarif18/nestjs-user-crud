@@ -47,8 +47,25 @@ export class UserService {
     // console.log(name);
     return await this.userRepo.findOne({ where: { username } });
   }
-}
 
+  async changePassword(
+    password: string,
+    nickname: string,
+    username: string,
+  ): Promise<UserEntity> {
+    const user = await this.userRepo.findOne({ where: { username } });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    if (user.nickname !== nickname) {
+      throw new NotFoundException('Nickname is incorrect');
+    }
+
+    user.password = password;
+    return await this.userRepo.save(user);
+  }
+}
 //UpdateResult and DeleteResult contains information about updation and deletion returned from typeOrm
 //They were what I was previously seeing rows affected
 //From there I can use .affected method to check how many rows affected

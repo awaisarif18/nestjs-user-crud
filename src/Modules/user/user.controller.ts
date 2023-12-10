@@ -64,6 +64,32 @@ export class UsersController {
   @Delete(':id')
   // localhost:3000/user/id
   async remove(@Param('id') id: number): Promise<DeleteResult> {
-    return await this.usersService.remove(id);
+    try {
+      return await this.usersService.remove(id);
+    } catch (error) {
+      console.error('Error removing user:', error);
+      throw error;
+    }
+  }
+
+  @Patch('changePassword/:username')
+  // localhost:3000/user/changePassword/username
+  async changePassword(
+    @Param('username') username: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    try {
+      console.log('Received change password request:', updateUserDto);
+      const result = await this.usersService.changePassword(
+        updateUserDto.password,
+        updateUserDto.nickname,
+        username,
+      );
+      console.log('Password changed successfully:', result);
+      return result;
+    } catch (error) {
+      console.error('Error changing password:', error);
+      throw error;
+    }
   }
 }
