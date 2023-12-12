@@ -6,6 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from '../user/user.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +22,7 @@ export class AuthService {
 
     if (!user) {
       throw new NotFoundException();
-    } else if (user?.password !== password) {
+    } else if (!(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException();
     } else {
       return {

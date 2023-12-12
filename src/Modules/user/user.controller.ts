@@ -77,7 +77,7 @@ export class UsersController {
   async changePassword(
     @Param('username') username: string,
     @Body() updateUserDto: UpdateUserDto,
-  ): Promise<UserEntity> {
+  ): Promise<UpdateResult> {
     try {
       console.log('Received change password request:', updateUserDto);
       const result = await this.usersService.changePassword(

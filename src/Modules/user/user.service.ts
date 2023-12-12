@@ -4,6 +4,7 @@ import { UserEntity } from '../entities/user.entity';
 import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
 import { UpdateUserDto } from '../../dto/user/update-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -13,9 +14,9 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
-    // insert method return <InsertResult> data type and we would have to use save when immediate data is required in the frontend
-
-    return await this.userRepo.insert(createUserDto);
+    const hashedPassword = await this.hashPassword(createUserDto.password);
+    const userToCreate = { ...createUserDto, password: hashedPassword };
+    return await this.userRepo.insert(userToCreate);
   }
 
   async findAll(): Promise<UserEntity[]> {
@@ -44,7 +45,6 @@ export class UserService {
   }
 
   async findByName(username: string): Promise<UserEntity> {
-    // console.log(name);
     return await this.userRepo.findOne({ where: { username } });
   }
 
@@ -52,7 +52,7 @@ export class UserService {
     password: string,
     nickname: string,
     username: string,
-  ): Promise<UserEntity> {
+  ): Promise<UpdateResult> {
     const user = await this.userRepo.findOne({ where: { username } });
 
     if (!user) {
@@ -62,11 +62,14 @@ export class UserService {
       throw new NotFoundException('Nickname is incorrect');
     }
 
-    user.password = password;
-    return await this.userRepo.save(user);
+    const hashedPassword = await this.hashPassword(password);
+
+    user.password = hashedPassword;
+    return this.userRepo.update(user.id, user);
+  }
+
+  hashPassword(password: string): Promise<string> {
+    const saltRounds = 10;
+    return bcrypt.hash(password, saltRounds);
   }
 }
-//UpdateResult and DeleteResult contains information about updation and deletion returned from typeOrm
-//They were what I was previously seeing rows affected
-//From there I can use .affected method to check how many rows affected
-//Now I can display other message as boolean or whatever i specify in deletion and the updated object in updation

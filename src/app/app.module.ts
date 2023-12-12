@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import 'reflect-metadata';
 import { RoleModule } from 'src/Modules/Role/role.module';
 import { AuthModule } from 'src/Modules/auth/auth.module';
+import { ContactModule } from 'src/Modules/contact/contact.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from 'src/Modules/auth/auth.module';
     DepartmentModule,
     RoleModule,
     AuthModule,
+    ContactModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
 })
