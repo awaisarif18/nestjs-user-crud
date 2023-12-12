@@ -11,18 +11,34 @@ export class ContactService {
     private readonly messageRepo: Repository<ContactEntity>,
   ) {}
   async create(createMessageDto: CreateMessageDto): Promise<InsertResult> {
-    return await this.messageRepo.insert(createMessageDto);
+    try {
+      return await this.messageRepo.insert(createMessageDto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findAll(): Promise<ContactEntity[]> {
-    return await this.messageRepo.find({});
+    try {
+      return await this.messageRepo.find({});
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findOne(id: number): Promise<ContactEntity> {
-    return await this.messageRepo.findOne({ where: { id } });
+    try {
+      return await this.messageRepo.findOne({ where: { id } });
+    } catch (error) {
+      throw error;
+    }
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.messageRepo.delete(id);
+    try {
+      return await this.messageRepo.delete(id);
+    } catch (error) {
+      throw error;
+    }
   }
 }

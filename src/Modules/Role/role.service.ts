@@ -13,29 +13,58 @@ export class RoleService {
   ) {}
 
   async createRole(createRoleDto: CreateRoleDto): Promise<InsertResult> {
-    return await this.roleRepo.insert(createRoleDto);
+    try {
+      console.log('Received role create request');
+      const result = await this.roleRepo.insert(createRoleDto);
+      console.log('Result:', result);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findAll(): Promise<RoleEntity[]> {
-    return await this.roleRepo.find({});
+    try {
+      console.log('Received roles fetch request');
+      return await this.roleRepo.find({});
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findOne(id: number): Promise<RoleEntity> {
-    const role = await this.roleRepo.findOne({ where: { id } });
-    if (!role) {
-      throw new NotFoundException('Role not found');
+    try {
+      const role = await this.roleRepo.findOne({ where: { id } });
+      if (!role) {
+        throw new NotFoundException('Role not found');
+      }
+      return role;
+    } catch (error) {
+      throw error;
     }
-    return role;
   }
 
   async update(
     id: number,
     updateRoleDto: UpdateRoleDto,
   ): Promise<UpdateResult> {
-    return await this.roleRepo.update(id, updateRoleDto);
+    try {
+      const result = await this.roleRepo.update(id, updateRoleDto);
+      if (result.affected === 0) {
+        throw new NotFoundException('Role not found');
+      }
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.roleRepo.delete(id);
+    try {
+      console.log('Received role delete request');
+      return await this.roleRepo.delete(id);
+    } catch (error) {
+      throw error;
+    }
   }
 }

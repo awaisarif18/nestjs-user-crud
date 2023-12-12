@@ -20,20 +20,31 @@ export class RoleController {
   @Post()
   // localhost:3000/role
   async create(@Body() createRoleDto: CreateRoleDto): Promise<InsertResult> {
-    return await this.roleService.createRole(createRoleDto);
+    try {
+      return await this.roleService.createRole(createRoleDto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get()
   // localhost:3000/role
-  //enkwwknd
   async findAll(): Promise<RoleEntity[]> {
-    return await this.roleService.findAll();
+    try {
+      return await this.roleService.findAll();
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get(':id')
   // localhost:3000/role/id
   async findOne(@Param('id') id: number): Promise<RoleEntity> {
-    return await this.roleService.findOne(id);
+    try {
+      return await this.roleService.findOne(id);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Patch(':id')
@@ -42,12 +53,20 @@ export class RoleController {
     @Param('id') id: number,
     @Body() updateRoleDto: UpdateRoleDto,
   ): Promise<UpdateResult> {
-    return await this.roleService.update(id, updateRoleDto);
+    try {
+      return await this.roleService.update(id, updateRoleDto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Delete(':id')
   // localhost:3000/role/id
   async remove(@Param('id') id: number): Promise<DeleteResult> {
-    return await this.roleService.remove(id);
+    try {
+      return await this.roleService.remove(id);
+    } catch (error) {
+      throw error;
+    }
   }
 }

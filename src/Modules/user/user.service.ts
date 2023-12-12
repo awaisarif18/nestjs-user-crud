@@ -14,38 +14,67 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
-    const hashedPassword = await this.hashPassword(createUserDto.password);
-    const userToCreate = { ...createUserDto, password: hashedPassword };
-    return await this.userRepo.insert(userToCreate);
+    try {
+      const hashedPassword = await this.hashPassword(createUserDto.password);
+      const userToCreate = { ...createUserDto, password: hashedPassword };
+      return await this.userRepo.insert(userToCreate);
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw new Error('Failed to create user');
+    }
   }
 
   async findAll(): Promise<UserEntity[]> {
-    return await this.userRepo.find({});
+    try {
+      console.log('Received users fetch request');
+      return await this.userRepo.find({});
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findOne(id: number): Promise<UserEntity> {
-    const user = await this.userRepo.findOne({
-      where: { id },
-    });
-    if (!user) {
-      throw new NotFoundException('User not found');
+    try {
+      const user = await this.userRepo.findOne({
+        where: { id },
+      });
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+      return user;
+    } catch (error) {
+      throw error;
     }
-    return user;
   }
 
   async update(
     id: number,
     updateUserDto: UpdateUserDto,
   ): Promise<UpdateResult> {
-    return await this.userRepo.update(id, updateUserDto);
+    try {
+      console.log('Received user update request');
+      return await this.userRepo.update(id, updateUserDto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.userRepo.delete(id);
+    try {
+      console.log('Received user delete request');
+      return await this.userRepo.delete(id);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findByName(username: string): Promise<UserEntity> {
-    return await this.userRepo.findOne({ where: { username } });
+    try {
+      console.log('Received user fetch request');
+      return await this.userRepo.findOne({ where: { username } });
+    } catch (error) {
+      throw error;
+    }
   }
 
   async changePassword(
@@ -53,23 +82,33 @@ export class UserService {
     nickname: string,
     username: string,
   ): Promise<UpdateResult> {
-    const user = await this.userRepo.findOne({ where: { username } });
+    try {
+      const user = await this.userRepo.findOne({ where: { username } });
 
-    if (!user) {
-      throw new NotFoundException('User not found');
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+      if (user.nickname !== nickname) {
+        throw new NotFoundException('Nickname is incorrect');
+      }
+
+      const hashedPassword = await this.hashPassword(password);
+
+      user.password = hashedPassword;
+      return this.userRepo.update(user.id, user);
+    } catch (error) {
+      console.error('Error changing password:', error);
+      throw error;
     }
-    if (user.nickname !== nickname) {
-      throw new NotFoundException('Nickname is incorrect');
-    }
-
-    const hashedPassword = await this.hashPassword(password);
-
-    user.password = hashedPassword;
-    return this.userRepo.update(user.id, user);
   }
 
-  hashPassword(password: string): Promise<string> {
-    const saltRounds = 10;
-    return bcrypt.hash(password, saltRounds);
+  async hashPassword(password: string): Promise<string> {
+    try {
+      const saltRounds = 10;
+      return await bcrypt.hash(password, saltRounds);
+    } catch (error) {
+      console.error('Error hashing password:', error);
+      throw error;
+    }
   }
 }

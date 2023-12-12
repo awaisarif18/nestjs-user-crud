@@ -12,31 +12,41 @@ import { CreateDepartmentDto } from '../../dto/department/create-department.dto'
 import { UpdateDepartmentDto } from '../../dto/department/update-department.dto';
 import { DeleteResult, InsertResult, UpdateResult } from 'typeorm';
 import { DepartmentEntity } from 'src/Modules/entities/department.entity';
-import { Public } from '../auth/decorators/public.decorator';
 
 @Controller('department')
 export class DepartmentController {
   constructor(private readonly departmentService: DepartmentService) {}
 
-  @Public()
   @Post()
   // localhost:3000/department
   async create(
     @Body() createDepartmentDto: CreateDepartmentDto,
   ): Promise<InsertResult> {
-    return await this.departmentService.createDepartment(createDepartmentDto);
+    try {
+      return await this.departmentService.createDepartment(createDepartmentDto);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get()
   // localhost:3000/department
   async findAll(): Promise<DepartmentEntity[]> {
-    return await this.departmentService.findAll();
+    try {
+      return await this.departmentService.findAll();
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get(':id')
   // localhost:3000/department/id
   async findOne(@Param('id') id: number): Promise<DepartmentEntity> {
-    return await this.departmentService.findOne(id);
+    try {
+      return await this.departmentService.findOne(id);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Patch(':id')
@@ -45,15 +55,23 @@ export class DepartmentController {
     @Param('id') id: number,
     @Body() updateDepartmentDto: UpdateDepartmentDto,
   ): Promise<UpdateResult> {
-    return await this.departmentService.updateDepartment(
-      id,
-      updateDepartmentDto,
-    );
+    try {
+      return await this.departmentService.updateDepartment(
+        id,
+        updateDepartmentDto,
+      );
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Delete(':id')
   // localhost:3000/department/id
   async remove(@Param('id') id: number): Promise<DeleteResult> {
-    return await this.departmentService.removeDepartment(id);
+    try {
+      return await this.departmentService.removeDepartment(id);
+    } catch (error) {
+      throw error;
+    }
   }
 }

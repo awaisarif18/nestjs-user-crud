@@ -9,6 +9,7 @@ export class ContactController {
   constructor(private readonly contactService: ContactService) {}
 
   @Post()
+  //localhost:3000/contact
   async create(
     @Body() createMessageDto: CreateMessageDto,
   ): Promise<InsertResult> {
@@ -24,17 +25,35 @@ export class ContactController {
   }
 
   @Get()
+  //localhost:3000/contact
   async findAll(): Promise<ContactEntity[]> {
-    return await this.contactService.findAll();
+    try {
+      console.log('Received messages fetch request');
+      return await this.contactService.findAll();
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get(':id')
+  //localhost:3000/contact/id
   async findOne(@Param('id') id: number): Promise<ContactEntity> {
-    return await this.contactService.findOne(id);
+    try {
+      console.log('Received message fetch request');
+      return await this.contactService.findOne(id);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Delete(':id')
+  //localhost:3000/contact/id
   async remove(@Param('id') id: number): Promise<DeleteResult> {
-    return await this.contactService.remove(id);
+    try {
+      console.log('Received message delete request');
+      return await this.contactService.remove(id);
+    } catch (error) {
+      throw error;
+    }
   }
 }

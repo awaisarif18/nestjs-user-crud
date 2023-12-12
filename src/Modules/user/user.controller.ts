@@ -35,13 +35,23 @@ export class UsersController {
   @Get()
   // localhost:3000/user
   async findAll(): Promise<UserEntity[]> {
-    return await this.usersService.findAll();
+    try {
+      console.log('Received users fetch request');
+      return await this.usersService.findAll();
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get(':id')
   // localhost:3000/user/id
   async findOne(@Param('id') id: number): Promise<UserEntity> {
-    return await this.usersService.findOne(id);
+    try {
+      console.log('Received user fetch request');
+      return await this.usersService.findOne(id);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Patch(':id')

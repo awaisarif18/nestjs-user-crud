@@ -16,19 +16,23 @@ export class AuthService {
   ) {}
 
   async login(loginDto: LoginDto) {
-    console.log(loginDto);
-    const { username, password } = loginDto;
-    const user = await this.usersService.findByName(username);
+    try {
+      console.log(loginDto);
+      const { username, password } = loginDto;
+      const user = await this.usersService.findByName(username);
 
-    if (!user) {
-      throw new NotFoundException();
-    } else if (!(await bcrypt.compare(password, user.password))) {
-      throw new UnauthorizedException();
-    } else {
-      return {
-        access_token: await this.jwtService.signAsync({ user }),
-        user,
-      };
+      if (!user) {
+        throw new NotFoundException('User not found');
+      } else if (!(await bcrypt.compare(password, user.password))) {
+        throw new UnauthorizedException('Invalid password');
+      } else {
+        return {
+          access_token: await this.jwtService.signAsync({ user }),
+          user,
+        };
+      }
+    } catch (error) {
+      throw error;
     }
   }
 }
