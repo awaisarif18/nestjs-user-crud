@@ -2,6 +2,7 @@
 import {
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   Length,
@@ -25,11 +26,14 @@ export class CreateUserDto {
 
   @Length(4, 30)
   @IsNotEmpty()
+  @IsString()
   nickname!: string;
 
   @IsOptional()
+  @IsNumber()
   Department?: number;
 
   @IsNotEmpty()
+  @IsNumber()
   Role!: number;
 }

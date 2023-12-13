@@ -24,6 +24,7 @@ export class UpdateUserDto {
 
   @Length(4, 30)
   @IsOptional()
+  @IsString()
   nickname?: string;
 
   @IsNumber()

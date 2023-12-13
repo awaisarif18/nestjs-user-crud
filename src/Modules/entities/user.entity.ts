@@ -15,11 +15,11 @@ export class UserEntity extends BaseEntity {
   @MinLength(7)
   email: string;
 
-  @Column({ length: 60, nullable: false })
+  @Column({ length: 60, nullable: false, type: String })
   @MinLength(7)
   password: string;
 
-  @Column({ length: 30, nullable: false })
+  @Column({ length: 30, nullable: false, type: String })
   @MinLength(4)
   nickname: string;
 

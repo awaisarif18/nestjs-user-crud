@@ -13,6 +13,7 @@ export class UserService {
     private readonly userRepo: Repository<UserEntity>,
   ) {}
 
+  //CRUD
   async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
     try {
       const hashedPassword = await this.hashPassword(createUserDto.password);
@@ -20,7 +21,6 @@ export class UserService {
       return await this.userRepo.insert(userToCreate);
     } catch (error) {
       console.error('Error creating user:', error);
-      throw new Error('Failed to create user');
     }
   }
 
@@ -68,6 +68,7 @@ export class UserService {
     }
   }
 
+  //Find By Username
   async findByName(username: string): Promise<UserEntity> {
     try {
       console.log('Received user fetch request');
@@ -77,6 +78,7 @@ export class UserService {
     }
   }
 
+  // Change password based on nickname
   async changePassword(
     password: string,
     nickname: string,
@@ -101,6 +103,7 @@ export class UserService {
     }
   }
 
+  //Hash password to secure from theft
   async hashPassword(password: string): Promise<string> {
     try {
       const saltRounds = 10;

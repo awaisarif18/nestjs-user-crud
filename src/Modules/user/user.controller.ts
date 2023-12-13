@@ -79,7 +79,7 @@ export class UsersController {
     }
   }
 
-  @Patch('changePassword/:username')
+  @Patch('change-password/:username')
   // localhost:3000/user/changePassword/username
   async changePassword(
     @Param('username') username: string,

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ContactService } from './contact.service';
-import { CreateMessageDto } from 'src/dto/contact/create-message.dto';
+import { CreateMessageDto } from '../../dto/contact/create-message.dto';
 import { DeleteResult, InsertResult } from 'typeorm';
 import { ContactEntity } from '../entities/contact.entity';
 
