@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class CreateMessageDto {
   @Length(7, 30)
   @IsNotEmpty()
+  @IsEmail()
   email!: string;
 
   @Length(3, 30)

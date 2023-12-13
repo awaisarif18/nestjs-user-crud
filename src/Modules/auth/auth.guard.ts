@@ -9,7 +9,9 @@ import {
 import { IS_PUBLIC_KEY } from './decorators/public.decorator';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
-import { jwtConstants } from './constants';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -43,7 +45,7 @@ export class AuthGuard implements CanActivate {
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
+        secret: process.env.JWT_SECRET,
       });
 
       request['user'] = payload; //Execution Context provides information about current execution context with three object [request, response, next]

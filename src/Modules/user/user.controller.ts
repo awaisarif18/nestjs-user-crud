@@ -28,7 +28,6 @@ export class UsersController {
       return result;
     } catch (error) {
       console.error('Error creating user:', error);
-      throw error;
     }
   }
 
@@ -39,7 +38,7 @@ export class UsersController {
       console.log('Received users fetch request');
       return await this.usersService.findAll();
     } catch (error) {
-      throw error;
+      console.error('Error fetching users:', error);
     }
   }
 
@@ -50,7 +49,7 @@ export class UsersController {
       console.log('Received user fetch request');
       return await this.usersService.findOne(id);
     } catch (error) {
-      throw error;
+      console.error('Error fetching user:', error);
     }
   }
 
@@ -67,7 +66,6 @@ export class UsersController {
       return result;
     } catch (error) {
       console.error('Error updating user:', error);
-      throw error;
     }
   }
 
@@ -78,7 +76,6 @@ export class UsersController {
       return await this.usersService.remove(id);
     } catch (error) {
       console.error('Error removing user:', error);
-      throw error;
     }
   }
 
@@ -99,7 +96,6 @@ export class UsersController {
       return result;
     } catch (error) {
       console.error('Error changing password:', error);
-      throw error;
     }
   }
 }

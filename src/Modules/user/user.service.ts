@@ -27,9 +27,9 @@ export class UserService {
   async findAll(): Promise<UserEntity[]> {
     try {
       console.log('Received users fetch request');
-      return await this.userRepo.find({});
+      return await this.userRepo.find();
     } catch (error) {
-      throw error;
+      console.error('Error fetching users:', error);
     }
   }
 
@@ -43,7 +43,7 @@ export class UserService {
       }
       return user;
     } catch (error) {
-      throw error;
+      console.error('Error fetching user:', error);
     }
   }
 
@@ -55,7 +55,7 @@ export class UserService {
       console.log('Received user update request');
       return await this.userRepo.update(id, updateUserDto);
     } catch (error) {
-      throw error;
+      console.error('Error updating user:', error);
     }
   }
 
@@ -64,7 +64,7 @@ export class UserService {
       console.log('Received user delete request');
       return await this.userRepo.delete(id);
     } catch (error) {
-      throw error;
+      console.error('Error deleting user:', error);
     }
   }
 
@@ -73,7 +73,7 @@ export class UserService {
       console.log('Received user fetch request');
       return await this.userRepo.findOne({ where: { username } });
     } catch (error) {
-      throw error;
+      console.error('Error fetching user:', error);
     }
   }
 
@@ -98,7 +98,6 @@ export class UserService {
       return this.userRepo.update(user.id, user);
     } catch (error) {
       console.error('Error changing password:', error);
-      throw error;
     }
   }
 
@@ -108,7 +107,6 @@ export class UserService {
       return await bcrypt.hash(password, saltRounds);
     } catch (error) {
       console.error('Error hashing password:', error);
-      throw error;
     }
   }
 }

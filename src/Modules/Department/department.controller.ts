@@ -25,7 +25,7 @@ export class DepartmentController {
     try {
       return await this.departmentService.createDepartment(createDepartmentDto);
     } catch (error) {
-      throw error;
+      console.error('Error creating department:', error);
     }
   }
 
@@ -35,7 +35,7 @@ export class DepartmentController {
     try {
       return await this.departmentService.findAll();
     } catch (error) {
-      throw error;
+      console.error('Error fetching departments:', error);
     }
   }
 
@@ -45,7 +45,7 @@ export class DepartmentController {
     try {
       return await this.departmentService.findOne(id);
     } catch (error) {
-      throw error;
+      console.error('Error fetching department:', error);
     }
   }
 
@@ -61,7 +61,7 @@ export class DepartmentController {
         updateDepartmentDto,
       );
     } catch (error) {
-      throw error;
+      console.error('Error updating department:', error);
     }
   }
 
@@ -71,7 +71,7 @@ export class DepartmentController {
     try {
       return await this.departmentService.removeDepartment(id);
     } catch (error) {
-      throw error;
+      console.error('Error deleting department:', error);
     }
   }
 }

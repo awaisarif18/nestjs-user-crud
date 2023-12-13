@@ -26,13 +26,14 @@ export class AuthService {
       } else if (!(await bcrypt.compare(password, user.password))) {
         throw new UnauthorizedException('Invalid password');
       } else {
+        console.log('User found:', user);
         return {
           access_token: await this.jwtService.signAsync({ user }),
           user,
         };
       }
     } catch (error) {
-      throw error;
+      console.error('Error logging in:', error);
     }
   }
 }

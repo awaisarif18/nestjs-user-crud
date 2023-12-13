@@ -19,7 +19,7 @@ export class RoleService {
       console.log('Result:', result);
       return result;
     } catch (error) {
-      throw error;
+      console.error('Error creating role:', error);
     }
   }
 
@@ -28,7 +28,7 @@ export class RoleService {
       console.log('Received roles fetch request');
       return await this.roleRepo.find({});
     } catch (error) {
-      throw error;
+      console.error('Error fetching roles:', error);
     }
   }
 
@@ -40,7 +40,7 @@ export class RoleService {
       }
       return role;
     } catch (error) {
-      throw error;
+      console.error('Error fetching role:', error);
     }
   }
 
@@ -55,7 +55,7 @@ export class RoleService {
       }
       return result;
     } catch (error) {
-      throw error;
+      console.error('Error updating role:', error);
     }
   }
 
@@ -64,7 +64,7 @@ export class RoleService {
       console.log('Received role delete request');
       return await this.roleRepo.delete(id);
     } catch (error) {
-      throw error;
+      console.error('Error deleting role:', error);
     }
   }
 }

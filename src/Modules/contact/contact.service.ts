@@ -14,7 +14,7 @@ export class ContactService {
     try {
       return await this.messageRepo.insert(createMessageDto);
     } catch (error) {
-      throw error;
+      console.error('Error creating contact:', error);
     }
   }
 
@@ -22,7 +22,7 @@ export class ContactService {
     try {
       return await this.messageRepo.find({});
     } catch (error) {
-      throw error;
+      console.error('Error fetching messages:', error);
     }
   }
 
@@ -30,7 +30,7 @@ export class ContactService {
     try {
       return await this.messageRepo.findOne({ where: { id } });
     } catch (error) {
-      throw error;
+      console.error('Error fetching message:', error);
     }
   }
 
@@ -38,7 +38,7 @@ export class ContactService {
     try {
       return await this.messageRepo.delete(id);
     } catch (error) {
-      throw error;
+      console.error('Error deleting message:', error);
     }
   }
 }

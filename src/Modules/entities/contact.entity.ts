@@ -7,7 +7,7 @@ export class ContactEntity extends BaseEntity {
   @Column({ length: 30, nullable: false, type: String })
   email: string;
 
-  @Column({ length: 30, nullable: false })
+  @Column({ length: 30, nullable: false, type: String })
   subject: string;
 
   @Column({ length: 255, nullable: false, type: String })
