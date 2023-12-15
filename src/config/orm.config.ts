@@ -12,17 +12,9 @@ const entities = [UserEntity, DepartmentEntity, RoleEntity, ContactEntity];
 export const ormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: process.env.DATABASE_HOST,
-  port: parseInt(process.env.DATABASE_PORT),
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
+  schema: process.env.DATABASE_SCHEMA,
+  url: process.env.DATABASE_URL,
   entities: entities,
   synchronize: false,
   logging: true,
-  ssl: true,
-  extra: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
 };
