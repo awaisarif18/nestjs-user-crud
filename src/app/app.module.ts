@@ -5,9 +5,9 @@ import { DepartmentModule } from '../Modules/Department/department.module';
 import { ormConfig } from '../config/orm.config';
 import { ConfigModule } from '@nestjs/config';
 import 'reflect-metadata';
-import { RoleModule } from 'src/Modules/Role/role.module';
-import { AuthModule } from 'src/Modules/auth/auth.module';
-import { ContactModule } from 'src/Modules/contact/contact.module';
+import { RoleModule } from '../Modules/Role/role.module';
+import { AuthModule } from '../Modules/auth/auth.module';
+import { ContactModule } from '../Modules/contact/contact.module';
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { MinLength } from 'class-validator';
-import { DepartmentEntity } from 'src/Modules/entities/department.entity';
+import { DepartmentEntity } from './department.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { RoleEntity } from './role.entity';
 import { BaseEntity } from './base.entity';

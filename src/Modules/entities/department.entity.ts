@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { IsNumber, MinLength } from 'class-validator';
-import { UserEntity } from 'src/Modules/entities/user.entity';
+import { UserEntity } from './user.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
 
