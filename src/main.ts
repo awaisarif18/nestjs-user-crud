@@ -2,8 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { ValidationPipe } from '@nestjs/common';
+import * as dotenv from 'dotenv';
 
 async function bootstrap() {
+  dotenv.config();
+
   try {
     const app = await NestFactory.create(AppModule);
 
