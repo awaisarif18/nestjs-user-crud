@@ -11,7 +11,7 @@ import { DepartmentService } from './department.service';
 import { CreateDepartmentDto } from '../../dto/department/create-department.dto';
 import { UpdateDepartmentDto } from '../../dto/department/update-department.dto';
 import { DeleteResult, InsertResult, UpdateResult } from 'typeorm';
-import { DepartmentEntity } from 'src/Modules/entities/department.entity';
+import { DepartmentEntity } from '../entities/department.entity';
 
 @Controller('department')
 export class DepartmentController {

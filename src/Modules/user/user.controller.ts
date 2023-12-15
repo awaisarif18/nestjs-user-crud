@@ -10,7 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateUserDto } from '../../dto/user/create-user.dto';
-import { UserEntity } from 'src/Modules/entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
 import { DeleteResult, InsertResult, UpdateResult } from 'typeorm';
 
 @Controller('user')

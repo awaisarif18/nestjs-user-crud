@@ -1,4 +1,4 @@
-import { LoginDto } from 'src/dto/auth/login.dto';
+import { LoginDto } from '../../dto/auth/login.dto';
 import { AuthService } from './auth.service';
 import {
   Body,

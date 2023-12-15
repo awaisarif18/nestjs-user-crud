@@ -8,10 +8,10 @@ import {
   Post,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
-import { CreateRoleDto } from 'src/dto/role/create-role.dto';
-import { UpdateRoleDto } from 'src/dto/role/update-role.dto';
+import { CreateRoleDto } from '../../dto/role/create-role.dto';
+import { UpdateRoleDto } from '../../dto/role/update-role.dto';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
-import { RoleEntity } from 'src/Modules/entities/role.entity';
+import { RoleEntity } from '../entities/role.entity';
 
 @Controller('role')
 export class RoleController {
