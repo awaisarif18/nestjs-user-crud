@@ -19,4 +19,10 @@ export const ormConfig: TypeOrmModuleOptions = {
   entities: entities,
   synchronize: false,
   logging: true,
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 };
