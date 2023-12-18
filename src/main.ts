@@ -11,7 +11,9 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
     const corsOptions: CorsOptions = {
-      origin: true,
+      origin:
+        'https://react-gigalabs-social-awaisarif18.vercel.app' ||
+        'https://react-gigalabs-social.vercel.app',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
       optionsSuccessStatus: 204,
