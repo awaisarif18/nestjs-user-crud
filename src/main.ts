@@ -15,8 +15,9 @@ async function bootstrap() {
 
       methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
       credentials: false,
-      preflightContinue: true,
+      // preflightContinue: true,
       optionsSuccessStatus: 204,
+      allowedHeaders: '[origin, content - type, accept, authorization]',
     };
 
     app.enableCors(corsOptions);
