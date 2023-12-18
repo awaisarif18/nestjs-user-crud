@@ -14,7 +14,7 @@ async function bootstrap() {
       origin: 'https://react-gigalabs-social-awaisarif18.vercel.app/',
 
       methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
-      credentials: true,
+      credentials: false,
       preflightContinue: true,
       optionsSuccessStatus: 204,
     };
