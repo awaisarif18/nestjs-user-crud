@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
-import { ValidationPipe } from '@nestjs/common';
+// import { ValidationPipe } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {
@@ -20,7 +20,7 @@ async function bootstrap() {
 
     app.enableCors(corsOptions);
 
-    app.useGlobalPipes(new ValidationPipe());
+    // app.useGlobalPipes(new ValidationPipe());
     await app.listen(process.env.PORT || 3000);
   } catch (error) {
     console.error('Failed to bootstrap the application:', error);
