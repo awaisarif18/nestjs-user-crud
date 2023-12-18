@@ -17,7 +17,17 @@ async function bootstrap() {
       credentials: false,
       // preflightContinue: true,
       optionsSuccessStatus: 204,
-      allowedHeaders: ['origin', 'content - type', 'accept', 'authorization'],
+      allowedHeaders: [
+        'origin',
+        'content - type',
+        'accept',
+        'authorization',
+        'X-Requested-With',
+        'Access-Control-Allow-Origin',
+        'Access-Control-Allow-Headers',
+        'Access-Control-Allow-Methods',
+        'Access-Control-Allow-Credentials',
+      ],
     };
 
     app.enableCors(corsOptions);
