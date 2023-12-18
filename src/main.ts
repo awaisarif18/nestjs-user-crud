@@ -9,13 +9,17 @@ async function bootstrap() {
 
   try {
     const app = await NestFactory.create(AppModule);
-    const whitelist = [
-      'https://react-gigalabs-social-awaisarif18.vercel.app',
-      'http://react-gigalabs-social-awaisarif18.vercel.app',
-    ];
+    app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+      next();
+    });
+    const whitelist = ['react-gigalabs-social-awaisarif18.vercel.app'];
     app.enableCors({
       origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
+        console.log('origin bhai jaan', origin);
+        if (!origin || whitelist.indexOf(origin) !== -1) {
           console.log('allowed cors for:', origin);
           callback(null, true);
         } else {
