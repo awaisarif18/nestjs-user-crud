@@ -13,7 +13,7 @@ async function bootstrap() {
     const corsOptions: CorsOptions = {
       origin: 'https://react-gigalabs-social-awaisarif18.vercel.app/',
 
-      // methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
       credentials: true,
       optionsSuccessStatus: 204,
     };
