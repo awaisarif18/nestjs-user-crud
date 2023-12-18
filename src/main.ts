@@ -14,10 +14,9 @@ async function bootstrap() {
       origin:
         'https://react-gigalabs-social-awaisarif18.vercel.app' ||
         'https://react-gigalabs-social.vercel.app',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
       credentials: true,
       optionsSuccessStatus: 204,
-      preflightContinue: true,
     };
 
     app.enableCors(corsOptions);
