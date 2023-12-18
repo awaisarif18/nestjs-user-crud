@@ -15,6 +15,7 @@ async function bootstrap() {
 
       methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
       credentials: true,
+      preflightContinue: true,
       optionsSuccessStatus: 204,
     };
 
