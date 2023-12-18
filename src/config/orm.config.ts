@@ -15,6 +15,6 @@ export const ormConfig: TypeOrmModuleOptions = {
   schema: process.env.DATABASE_SCHEMA,
   url: process.env.DATABASE_URL,
   entities: entities,
-  synchronize: false,
+  synchronize: true,
   logging: true,
 };
