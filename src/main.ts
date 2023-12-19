@@ -15,13 +15,16 @@ async function bootstrap() {
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,DELETE, PATCH, HEAD, OPTIONS',
       );
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+      res.header(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Accept, Origin, X-Requested-With, Authorization, Access-Control-Allow-Origin,  Access-Control-Allow-Methods, Access-Control-Allow-Credentials',
+      );
       next();
     });
 
     app.enableCors({
       allowedHeaders: '*',
-      origin: '*',
+      origin: 'https://react-gigalabs-social-awaisarif18.vercel.app',
     });
 
     // const corsOptions: CorsOptions = {
