@@ -17,7 +17,7 @@ async function bootstrap() {
       );
       res.header(
         'Access-Control-Allow-Headers',
-        'Content-Type, Accept, Origin, X-Requested-With, Authorization, Access-Control-Allow-Origin,  Access-Control-Allow-Methods, Access-Control-Allow-Credentials',
+        'Content-Type, Accept, Origin, X-Requested-With, Authorization',
       );
       next();
     });
