@@ -24,7 +24,7 @@ async function bootstrap() {
 
     app.enableCors({
       allowedHeaders: '*',
-      origin: 'https://react-gigalabs-social-awaisarif18.vercel.app',
+      origin: '*',
     });
 
     // const corsOptions: CorsOptions = {
@@ -32,7 +32,7 @@ async function bootstrap() {
 
     //   methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
     //   credentials: false,
-    //   // preflightContinue: true,
+    // preflightContinue: true,
     //   optionsSuccessStatus: 204,
     //   allowedHeaders: [
     //     'origin',
