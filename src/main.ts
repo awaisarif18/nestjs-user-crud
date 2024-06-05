@@ -10,7 +10,7 @@ async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
     app.use((req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*');
+      res.header('*');
       res.header(
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,DELETE, PATCH, HEAD, OPTIONS',
@@ -18,6 +18,7 @@ async function bootstrap() {
       res.header(
         'Access-Control-Allow-Headers',
         'Content-Type, Accept, Origin, X-Requested-With, Authorization',
+        '*',
       );
       next();
     });
