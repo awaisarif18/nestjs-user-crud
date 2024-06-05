@@ -25,6 +25,7 @@ async function bootstrap() {
     app.enableCors({
       allowedHeaders: '*',
       origin: '*',
+      methods: '*',
     });
 
     // const corsOptions: CorsOptions = {
