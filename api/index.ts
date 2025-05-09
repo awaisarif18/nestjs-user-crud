@@ -25,7 +25,7 @@ async function bootstrap() {
 
     app.enableCors({
       allowedHeaders: '*',
-      origin: 'https://react-gigalabs-social.vercel.app',
+      origin: '*',
       methods: '*',
     });
 
