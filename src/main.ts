@@ -10,7 +10,7 @@ async function bootstrap() {
 
     // Enable CORS with proper configuration
     app.enableCors({
-      origin: '*',
+      origin: 'https://react-gigalabs-social.vercel.app',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       allowedHeaders: 'Content-Type,Accept,Authorization,X-Requested-With',
     });
