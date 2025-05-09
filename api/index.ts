@@ -24,9 +24,8 @@ async function bootstrap() {
     });
 
     app.enableCors({
+      origin: '*',
       allowedHeaders: '*',
-      origin:
-        'https://react-gigalabs-social.vercel.app, https://react-gigalabs-social-awaisarif18.vercel.app/, https://react-gigalabs-social-git-main-awaisarif18.vercel.app/',
       methods: '*',
     });
 
