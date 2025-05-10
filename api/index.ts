@@ -1,8 +1,9 @@
+import { createServer, proxy } from 'aws-serverless-express';
+import { Handler } from 'aws-lambda';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app/app.module';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+import { ExpressAdapter } from '@nestjs/platform-express';
+import * as express from 'express';
 
 const allowedOrigins = [
   'https://react-gigalabs-social.vercel.app',
@@ -10,38 +11,39 @@ const allowedOrigins = [
   'https://react-gigalabs-social-git-main-awaisarif18.vercel.app',
 ];
 
-async function bootstrap() {
-  try {
-    const app = await NestFactory.create(AppModule);
+let cachedServer: Handler;
 
-    app.enableCors({
-      origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error(`CORS error: Origin ${origin} not allowed`));
-        }
-      },
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
-      allowedHeaders: [
-        'Content-Type',
-        'Accept',
-        'Authorization',
-        'Origin',
-        'X-Requested-With',
-      ],
-      optionsSuccessStatus: 204,
-    });
+async function bootstrap(): Promise<Handler> {
+  const expressApp = express();
 
-    await app.listen(3001);
-    console.log('Application is running on port 3001');
-  } catch (error) {
-    console.error('Failed to bootstrap the application:', error);
-  }
+  const app = await NestFactory.create(
+    AppModule,
+    new ExpressAdapter(expressApp),
+  );
+
+  app.enableCors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS not allowed'));
+      }
+    },
+    credentials: true,
+  });
+
+  await app.init();
+
+  const server = createServer(expressApp);
+  return (event, context) => proxy(server, event, context);
 }
 
-bootstrap();
+export const handler: Handler = async (event, context, callback) => {
+  if (!cachedServer) {
+    cachedServer = await bootstrap();
+  }
+  return cachedServer(event, context, callback);
+};
 
 // import { NestFactory } from '@nestjs/core';
 // import { AppModule } from '../src/app/app.module';
