@@ -4,6 +4,12 @@ import { AppModule } from '../src/app/app.module';
 // import { ValidationPipe } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 
+const allowedOrigins = [
+  'https://react-gigalabs-social.vercel.app/',
+  'https://react-gigalabs-social-awaisarif18.vercel.app/',
+  'https://react-gigalabs-social-git-main-awaisarif18.vercel.app/',
+];
+
 async function bootstrap() {
   dotenv.config();
 
@@ -24,7 +30,15 @@ async function bootstrap() {
     });
 
     app.enableCors({
-      origin: '*',
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      credentials: true,
+      optionsSuccessStatus: 204,
       allowedHeaders: '*',
       methods: '*',
     });
