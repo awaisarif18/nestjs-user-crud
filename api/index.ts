@@ -16,7 +16,6 @@ async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
     app.use((req, res, next) => {
-      res.header('*');
       res.header(
         'Access-Control-Allow-Methods',
         'GET,PUT,POST,DELETE, PATCH, HEAD, OPTIONS',
