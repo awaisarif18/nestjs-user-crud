@@ -17,7 +17,7 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "destination": "src/main.ts",
+      "destination": "api/index.ts",
       "permanent": false
     }
 
