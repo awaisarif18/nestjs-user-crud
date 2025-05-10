@@ -1,49 +1,40 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app/app.module';
-// import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
-// import { ValidationPipe } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 
+dotenv.config();
+
 const allowedOrigins = [
-  'https://react-gigalabs-social.vercel.app/',
-  'https://react-gigalabs-social-awaisarif18.vercel.app/',
-  'https://react-gigalabs-social-git-main-awaisarif18.vercel.app/',
+  'https://react-gigalabs-social.vercel.app',
+  'https://react-gigalabs-social-awaisarif18.vercel.app',
+  'https://react-gigalabs-social-git-main-awaisarif18.vercel.app',
 ];
 
 async function bootstrap() {
-  dotenv.config();
-
   try {
     const app = await NestFactory.create(AppModule);
-    app.use((req, res, next) => {
-      res.header(
-        'Access-Control-Allow-Methods',
-        'GET,PUT,POST,DELETE, PATCH, HEAD, OPTIONS',
-      );
-      res.header(
-        'Access-Control-Allow-Headers',
-        'Content-Type, Accept, Origin, X-Requested-With, Authorization',
-        '*',
-      );
-      next();
-    });
 
     app.enableCors({
       origin: (origin, callback) => {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        if (!origin || allowedOrigins.includes(origin)) {
           callback(null, true);
         } else {
-          callback(new Error('Not allowed by CORS'));
+          callback(new Error(`CORS error: Origin ${origin} not allowed`));
         }
       },
       credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+      allowedHeaders: [
+        'Content-Type',
+        'Accept',
+        'Authorization',
+        'Origin',
+        'X-Requested-With',
+      ],
       optionsSuccessStatus: 204,
-      allowedHeaders: '*',
-      methods: '*',
     });
 
     await app.listen(3001);
-    // Added success logging
     console.log('Application is running on port 3001');
   } catch (error) {
     console.error('Failed to bootstrap the application:', error);
